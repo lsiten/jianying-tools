@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "本机智能剪辑系统",
+    "subtitle": "素材与业务数据保留在 Mac；TURN 仅以会话级短期凭据中继受限网络流量",
+    "output": "docs/architecture/本机智能剪辑系统.html"
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [40, 110],
+    "cols": 7,
+    "gapX": 40,
+    "gapY": 50,
+    "cellW": 128,
+    "cellH": 64
+  },
+  "components": [
+    { "id": "mobile", "type": "external", "label": "iOS / Android", "sublabel": "Tauri 2 + Vue", "row": 1, "col": 0 },
+    { "id": "signal", "type": "cloud", "label": "信令", "sublabel": "Worker + Durable Object", "row": 0, "col": 2, "tag": "无素材" },
+    { "id": "webrtc", "type": "backend", "label": "WebRTC 接收器", "sublabel": "node-datachannel", "row": 1, "col": 2 },
+    { "id": "server", "type": "backend", "label": "本机业务服务", "sublabel": "Node + Hono", "row": 1, "col": 3 },
+    { "id": "sqlite", "type": "database", "label": "SQLite WAL", "sublabel": "状态、审计、任务", "row": 0, "col": 4 },
+    { "id": "library", "type": "database", "label": "APFS 素材库", "sublabel": "暂存、blob、成片", "row": 2, "col": 4 },
+    { "id": "web", "type": "frontend", "label": "本机 Web", "sublabel": "Vue 3 + Vite", "row": 0, "col": 6 },
+    { "id": "media", "type": "backend", "label": "媒体 Worker", "sublabel": "Python + CosyVoice", "row": 1, "col": 5 },
+    { "id": "runner", "type": "security", "label": "剪映 Runner", "sublabel": "Swift + AX / ScreenCapture", "row": 2, "col": 5 }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "用户 macOS（本机）", "wraps": ["webrtc", "server", "sqlite", "library", "web", "media", "runner"] },
+    { "kind": "security-group", "label": "公网仅控制面", "wraps": ["signal"] }
+  ],
+  "connections": [
+    { "from": "mobile", "to": "signal", "label": "WSS：配对 / SDP / ICE", "variant": "security", "fromSide": "top", "toSide": "left", "route": "orthogonal-h", "labelDy": -18 },
+    { "from": "signal", "to": "webrtc", "label": "WSS 出站", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "orthogonal-v", "labelDx": 50 },
+    { "from": "mobile", "to": "webrtc", "label": "WebRTC DataChannel / TURN", "variant": "emphasis" },
+    { "from": "webrtc", "to": "server", "label": "持久化 ACK", "variant": "emphasis", "labelDy": -24 },
+    { "from": "server", "to": "sqlite", "label": "唯一写入者", "fromSide": "top", "toSide": "left", "route": "orthogonal-h", "labelDy": -18 },
+    { "from": "server", "to": "library", "label": "同卷提交", "variant": "emphasis", "fromSide": "bottom", "toSide": "top", "route": "orthogonal-v", "labelDx": -18 },
+    { "from": "web", "to": "server", "label": "本机 OpenAPI", "variant": "emphasis", "fromSide": "left", "toSide": "right" },
+    { "from": "server", "to": "media", "label": "本机 UDS RPC", "variant": "dashed" },
+    { "from": "server", "to": "runner", "label": "lease + 受限动作", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "orthogonal-v", "labelDx": 48 },
+    { "from": "media", "to": "library", "label": "派生物", "variant": "dashed", "fromSide": "bottom", "toSide": "right", "route": "orthogonal-v", "labelDx": -16 }
+  ],
+  "cards": [
+    {
+      "dot": "rose",
+      "title": "TURN 策略",
+      "items": ["先 STUN 直连", "本机为每个会话生成短期 Cloudflare TURN 凭据", "不经 SFU 或 Workers 素材落盘"]
+    },
+    {
+      "dot": "cyan",
+      "title": "可靠性",
+      "items": ["写盘 + manifest 持久化后 ACK", "SHA-256 内容寻址与逻辑引用", "重启按 SQLite、manifest、文件共同恢复"]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.6/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "files": {
+    "includes": [
+      "apps/**",
+      "!apps/client/dist",
+      "!apps/mobile-upload/dist",
+      "!apps/mobile-shell/src-tauri/gen",
+      "!apps/mobile-shell/src-tauri/target",
+      "packages/**",
+      "workers/**",
+      "*.json",
+      "*.yaml",
+      "*.md"
+    ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "recommended"
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "jianying-local-signaling",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-31",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "../../apps/mobile-upload/dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": true
+  },
+  "routes": [
+    {
+      "pattern": "upload.lene.fun",
+      "custom_domain": true
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SIGNALING_ROOM",
+        "class_name": "SignalingRoom"
+      },
+      {
+        "name": "CONTROL_ROOM",
+        "class_name": "ControlRoom"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["SignalingRoom"]
+    },
+    {
+      "tag": "v2",
+      "new_sqlite_classes": ["ControlRoom"]
+    }
+  ]
+}

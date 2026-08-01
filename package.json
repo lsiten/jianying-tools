@@ -1,0 +1,23 @@
+{
+  "name": "jianying-auto-editor",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": ">=22.19.0 <23"
+  },
+  "scripts": {
+    "dev:server": "pnpm --filter @jianying/server dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit -p tsconfig.json && pnpm --filter @jianying/client typecheck && pnpm --filter @jianying/mobile-upload typecheck",
+    "lint": "biome check .",
+    "format": "biome format --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.6",
+    "@types/node": "22.19.7",
+    "typescript": "5.9.3",
+    "vitest": "4.1.0"
+  }
+}

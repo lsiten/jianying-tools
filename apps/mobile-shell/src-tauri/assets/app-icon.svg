@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Jianying Auto Editor</title>
+  <defs>
+    <linearGradient id="surface" x1="70" y1="54" x2="440" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172033"/>
+      <stop offset="1" stop-color="#07111F"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="167" y1="158" x2="358" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8DF1D4"/>
+      <stop offset="1" stop-color="#47A7FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#surface)"/>
+  <rect x="115" y="129" width="282" height="254" rx="44" fill="#0E1A2B" stroke="#31445F" stroke-width="14"/>
+  <path d="M189 198h134M189 256h134M189 314h92" stroke="url(#accent)" stroke-linecap="round" stroke-width="26"/>
+  <circle cx="353" cy="314" r="34" fill="url(#accent)"/>
+</svg>

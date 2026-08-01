@@ -1,0 +1,27 @@
+{
+  "name": "@jianying/server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --import tsx src/index.ts",
+    "start": "node --import tsx src/index.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "1.19.7",
+    "@hono/zod-openapi": "1.2.1",
+    "@jianying/contracts": "workspace:*",
+    "@jianying/domain": "workspace:*",
+    "better-sqlite3": "12.8.0",
+    "drizzle-orm": "0.45.1",
+    "hono": "4.12.7",
+    "node-datachannel": "0.32.3",
+    "pino": "10.3.1",
+    "undici": "7.28.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "7.6.13",
+    "tsx": "4.21.0"
+  }
+}

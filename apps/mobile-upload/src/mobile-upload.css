@@ -1,0 +1,226 @@
+.mobile-upload-shell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-inline: auto;
+  max-inline-size: 680px;
+  min-block-size: 100dvb;
+  padding: var(--space-8) var(--space-4)
+    calc(var(--space-8) + env(safe-area-inset-bottom));
+}
+
+.mobile-upload-shell__eyebrow-row {
+  align-items: flex-start;
+  display: flex;
+  gap: var(--space-3);
+  justify-content: space-between;
+}
+
+.mobile-upload-shell__header h1 {
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  font-weight: 590;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: var(--space-2) 0;
+}
+
+.mobile-upload-shell__summary,
+.pairing-onboarding > p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.mobile-upload-shell__summary,
+.upload-destination strong {
+  overflow-wrap: anywhere;
+}
+
+.eyebrow {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 510;
+  letter-spacing: 0.08em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.transfer-notice,
+.pairing-onboarding {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: var(--space-5);
+}
+
+.pairing-onboarding,
+.upload-launchpad,
+.upload-destination {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.pairing-onboarding h2,
+.upload-destination strong {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 590;
+  line-height: 1.33;
+  margin: var(--space-1) 0 0;
+}
+
+.upload-launchpad {
+  gap: var(--space-3);
+}
+
+.upload-destination {
+  align-items: center;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: var(--space-4);
+}
+
+.upload-destination .eyebrow {
+  margin-block-end: var(--space-1);
+}
+
+.status-pill {
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: var(--space-1) var(--space-2);
+  white-space: nowrap;
+}
+
+.status-pill[data-state="ready"] {
+  color: var(--status-success);
+}
+
+.field-group {
+  color: var(--text-secondary);
+  display: grid;
+  font-size: 0.875rem;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.field-group input,
+.field-group select {
+  background: var(--surface-panel);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  color: var(--text-primary);
+  min-block-size: 44px;
+  padding: 10px var(--space-3);
+  width: 100%;
+}
+
+.pairing-form,
+.upload-actions {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.upload-actions {
+  gap: var(--space-3);
+}
+
+.upload-action {
+  background: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  border-radius: 6px;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: grid;
+  gap: var(--space-1);
+  min-block-size: 116px;
+  padding: var(--space-4);
+  text-align: start;
+  transition:
+    background-color 150ms ease-out,
+    border-color 150ms ease-out,
+    transform 150ms ease-out;
+}
+
+.upload-action:hover:not(:disabled),
+.upload-action:focus-visible {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.upload-action:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.upload-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.upload-action[data-recording="true"] {
+  background: var(--status-error);
+  border-color: var(--status-error);
+}
+
+.upload-action__title {
+  font-size: 1rem;
+  font-weight: 590;
+}
+
+.upload-action__hint {
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.directory-switcher {
+  color: var(--text-muted);
+  display: grid;
+  font-size: 0.75rem;
+  font-weight: 510;
+  gap: var(--space-1);
+  letter-spacing: 0.04em;
+  min-inline-size: 0;
+}
+
+.directory-switcher select {
+  background: var(--surface-panel);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  max-inline-size: 9rem;
+  min-block-size: 40px;
+  overflow: hidden;
+  padding: var(--space-2) var(--space-3);
+  text-overflow: ellipsis;
+}
+
+.directory-current {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 510;
+  white-space: nowrap;
+}
+
+.camera-preview {
+  aspect-ratio: 16 / 9;
+  background: var(--surface-panel);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  inline-size: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .mobile-upload-shell {
+    padding-inline: var(--space-6);
+  }
+
+  .upload-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

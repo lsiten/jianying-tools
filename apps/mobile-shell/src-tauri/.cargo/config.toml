@@ -1,0 +1,4 @@
+# The user-level `ustc` source currently points at an unavailable Git endpoint.
+# Keep its source name so this workspace overrides only its own Rust dependency resolution.
+[source.ustc]
+registry = "sparse+https://rsproxy.cn/index/"
